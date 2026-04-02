@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>our little house - ذكرياتنا</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #faf7f2;
+            font-family: 'Segoe UI', 'Tahoma', system-ui, -apple-system, 'Georgia', serif;
+            direction: rtl;
+            color: #3e3a36;
+            padding: 20px;
+        }
+
+        /* الحاوية الرئيسية */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* الرأس */
+        .hero {
+            text-align: center;
+            padding: 50px 20px 40px;
+            background: linear-gradient(145deg, #ffffff, #f5efe7);
+            border-radius: 60px 60px 80px 80px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            border: 1px solid #f0e4d5;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #b48c6c, #d9b48b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .quote {
+            font-size: 1.7rem;
+            font-style: italic;
+            background: #ffffffcc;
+            backdrop-filter: blur(4px);
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 100px;
+            color: #a47551;
+            border: 1px solid #eedbcb;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.02);
+            margin: 20px 0;
+        }
+
+        .date-badge {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            background: #f4ede5;
+            display: inline-block;
+            padding: 8px 25px;
+            border-radius: 40px;
+            color: #7f6148;
+        }
+
+        /* عداد الأيام */
+        .counter-card {
+            background: white;
+            border-radius: 50px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 60px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            border: 1px solid #ffe6d5;
+        }
+        .days-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #b8734b;
+            line-height: 1;
+        }
+        .days-label {
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            color: #b48a6b;
+        }
+
+        /* قسم الكروت (الصور والفيديو) */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 400;
+            margin: 50px 0 25px;
+            border-right: 5px solid #e7cbb5;
+            padding-right: 20px;
+            color: #5f4c3b;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 35px;
+            margin-bottom: 60px;
+        }
+
+        /* الكارت الواحد */
+        .memory-card {
+            background: #ffffffdd;
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            transition: all 0.25s ease;
+            border: 1px solid #f4e2d4;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 25px 40px -14px rgba(0,0,0,0.15);
+            border-color: #e8cfbc;
+        }
+
+        /* محتوى الصورة أو الفيديو */
+        .media-box {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background-color: #fef6ef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .media-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.2s;
+        }
+
+        .media-box video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* لو الصورة/فيديو لسه متضافش هنحط placeholder */
+        .placeholder-icon {
+            color: #dcc9b9;
+            font-size: 3rem;
+            text-align: center;
+        }
+
+        .card-caption {
+            padding: 18px 16px 20px;
+            background: white;
+            border-top: 1px solid #f5e8de;
+        }
+
+        .card-caption p {
+            font-size: 0.95rem;
+            color: #7f6b5c;
+        }
+
+        /* رسالة خاصة */
+        .message-special {
+            background: #fffaf5;
+            border-radius: 50px;
+            padding: 35px 30px;
+            margin: 40px 0 60px;
+            text-align: center;
+            border: 1px solid #f1dfd2;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+        }
+        .message-special p {
+            font-size: 1.6rem;
+            font-family: cursive;
+            color: #b56f48;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 10px;
+            color: #bc9a7c;
+            border-top: 1px solid #efdfd2;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.2rem; }
+            .quote { font-size: 1.2rem; }
+            .message-special p { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- رأس الموقع -->
+    <div class="hero">
+        <h1>🏡 our little house</h1>
+        <div class="quote">
+            "I'm not going to leave you on your own ❤️"
+        </div>
+        <div class="date-badge">
+            📅 الشهر إلي لقيت فيه الكنز إلي كنت بدور عليه سنين❤️ - نوفمبر 2024
+        </div>
+    </div>
+
+    <!-- عداد الأيام (تاريخ التعارف شهر 11 2024) -->
+    <div class="counter-card" id="counterSection">
+        <div class="days-number" id="daysCount">--</div>
+        <div class="days-label">يوم معًا في بيتنا الصغير</div>
+    </div>
+
+    <!-- صور (كروت) -->
+    <div class="section-title">📸 صورنا الحلوة</div>
+    <div class="cards-grid" id="photosGrid">
+        <!-- هتضيف صورك هنا ببساطة: انسخ القطعة دي وغير اسم الصورة -->
+        <!-- الصورة 1 -->
+        <div class="memory-card">
+            <div class="media-box">
+                <img src="/Media /IMG-20251215-WA0150.jpg " alt="الصوره إلي آنتي بتحبيها❤️ " onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'placeholder-icon\'>🖼️<br>ضع صورة هنا</div>';">
+            </div>
+            <div class="card-caption">
+                <p>✨طفلتي إلي أنا دايما فخور بيها </p>
+            </div>
+        </div>
+        <!-- الصورة 2 -->
+        <div class="memory-card">
+            <div class="media-box">
+                <img src="/Media /IMG-20260304-WA0111.jpg " alt="ذكرى" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'placeholder-icon\'>🖼️<br>ضع صورة هنا</div>';">
+            </div>
+            <div class="card-caption">
+                <p> كنت خايف يفتكروكي أميره وياخدوكي مني😔❤️ </p>
+            </div>
+        </div>
+        <!-- الصورة 3 (زيادة) -->
+        <div class="memory-card">
+            <div class="media-box">
+                <img src="/Media /IMG-20260318-WA0080.jpg " alt="ذكرى" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'placeholder-icon\'>🖼️<br>ضع صورة هنا</div>';">
+            </div>
+            <div class="card-caption">
+                <p>💕عيونك واكتر صوره أنا بحبها لينا بجد </p>
+            </div>
+        </div>
+        <div class="memory-card">
+            <div class="media-box">
+                <img src="/Media /IMG-20260401-WA0229.jpg " alt="ذكرى" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'placeholder-icon\'>🖼️<br>ضع صورة هنا</div>';">
+            </div>
+            <div class="card-caption">
+                <p>💕عيونك تآني عشان بحبها اوي </p>
+            </div>
+        </div>
+        <div class="memory-card">
+            <div class="media-box">
+                <img src="/Media /IMG-20251217-WA0148.jpg " alt="ذكرى" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'placeholder-icon\'>🖼️<br>ضع صورة هنا</div>';">
+            </div>
+            <div class="card-caption">
+                <p>💕كان يوم تحفه زيك وكنا مبسوطين آوي ❤️ </p>
+            </div>
+        </div>
+        <div class="memory-card">
+            <div class="media-box">
+                <img src="/Media /IMG-20260318-WA0084.jpg " alt="ذكرى" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'placeholder-icon\'>🖼️<br>ضع صورة هنا</div>';">
+            </div>
+            <div class="card-caption">
+                <p>💕يبختي بالحلاوه ديه كلها بجد </p>
+            </div>
+        </div>
+        <div class="memory-card">
+            <div class="media-box">
+                <img src="/Media /IMG-20260118-WA0041.jpg " alt="ذكرى" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'placeholder-icon\'>🖼️<br>ضع صورة هنا</div>';">
+            </div>
+            <div class="card-caption">
+                <p>💕ديه حاجه من ريحه اولى عشان تعرفي قد إيه أنا محظوظ بالقمر الي عمال يحلو كل يوم عن إلي قبله ده </p>
+            </div>
+        </div>
+        <div class="memory-card">
+            <div class="media-box">
+                <img src="/Media /IMG-20250918-WA0083.jpg " alt="ذكرى" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'placeholder-icon\'>🖼️<br>ضع صورة هنا</div>';">
+            </div>
+            <div class="card-caption">
+                <p>💕this picture which made by the most beautiful person who I love the most when my mum was holding me and it seems that I'm very happy and lucky too</p>
+            </div>
+        </div>
+        <div class="memory-card">
+            <div class="media-box">
+                <img src="/Media /IMG-20250705-WA0089.jpg " alt="ذكرى" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'placeholder-icon\'>🖼️<br>ضع صورة هنا</div>';">
+            </div>
+            <div class="card-caption">
+                <p>💕first time holding  your beautiful hands and I remember how shy I was pretending silly thing just to feel the touch of your hand</p>
+            </div>
+        </div>
+        <div class="memory-card">
+            <div class="media-box">
+                <img src="/Media /IMG-20250615-WA0071.jpg " alt="ذكرى" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'placeholder-icon\'>🖼️<br>ضع صورة هنا</div>';">
+            </div>
+            <div class="card-caption">
+                <p>💕I can't forget the first photo we took together after we finally moving from friends to the best couples ever🫀 </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- فيديوهات (كروت) -->
+    <div class="section-title">🎥 فيديوهاتنا</div>
+    <div class="cards-grid" id="videosGrid">
+        <!-- فيديو 1 -->
+        <div class="memory-card">
+            <div class="media-box">
+                <video controls poster="" style="background:#f9f0e8;">
+                    <source src="/Media /VID-20260227-WA0049.mp4 " type="video/mp4">
+                    الفيديو غير موجود
+                </video>
+            </div>
+            <div class="card-caption">
+                <p> أي خدمه عملناه مظبوط عشان كان نفسك فيه❤️😂 </p>
+            </div>
+        </div>
+        <!-- فيديو 2 -->
+        <div class="memory-card">
+            <div class="media-box">
+                <video controls poster="" style="background:#f9f0e8;">
+                    <source src="/Media /VID-20260227-WA0048.mp4 " type="video/mp4">
+                </video>
+            </div>
+            <div class="card-caption">
+                <p>طبعا حته سرسج عشان بسبوسه بتحبها❤️🤚 </p>
+            </div>
+        </div>
+        <div class="memory-card">
+            <div class="media-box">
+                <video controls poster="" style="background:#f9f0e8;">
+                    <source src="/Media /VID-20251231-WA0192.mp4 " type="video/mp4">
+                </video>
+            </div>
+            <div class="card-caption">
+                <p>بمسك أيدك اكنها كنز وخايفه يضيع وانتي فعلا كنز❤️ </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- رسالة الحب (اهم جمله تظهر هنا كمان) -->
+    <div class="message-special">
+        <p>❤️ Hi, bsabosa I want to tell u somethings and I hope these things make u feel better because the Last argument that happened between us was a very scary and it was so bad on us and I hope we never do it again, I know that u afraid of me, to leave u or afraid of something else like I get boring from u and leave u and look for someone else but I'm here to tell u that all of your inside thoughts are just fake ones, and they aren't gonna be real at all because I love u so deeply and I don't have anyone else in my life that compensates u  and no one will ever does, you're my best friend, wife, sister, brother, my mom and my dad you're my everything ❤️</p>
+        <p style="font-size: 1rem; margin-top: 15px;">- our little house -</p>
+    </div>
+
+    <footer>
+       I hope this site could include all of our memories but I added the most beautiful ones here and of course nothing beautiful as u❤️ 
+       كنت عايز أعملك سكيتش بس عشان أهلك عملتلك ده🫀 
+    </footer>
+</div>
+
+<script>
+    // عداد الأيام من شهر 11 (نوفمبر) 2024
+    // ملاحظة: الشهور في جافاسكريبت تبدأ من 0 يعني نوفمبر = 10
+    const startDate = new Date(2024, 10, 1);  // 1 نوفمبر 2024 (لو عندك يوم محدد غير أول الشهر، غير الرقم)
+    function updateDays() {
+        const today = new Date();
+        // نزيل الوقت من المقارنة عشان نحسب الأيام بشكل دقيق
+        const start = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+        const now = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const diffTime = now - start;
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const daysSpan = document.getElementById("daysCount");
+        if(diffDays >= 0) {
+            daysSpan.innerText = diffDays;
+        } else {
+            daysSpan.innerText = 0;
+        }
+    }
+    updateDays();
+    // تحديث يومي
+    setInterval(updateDays, 86400000);
+</script>
+</body>
+</html>
